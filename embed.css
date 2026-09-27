@@ -1,91 +1,155 @@
-:root { 
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif; 
-  background: none; 
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700;900&display=swap');
+
+:root {
+  --bg-color: #0a0a0d;
+  --text-color: #f5f5f7;
+  --nav-bg: rgba(18, 18, 22, 0.78);
+  --card-bg: rgba(255, 255, 255, 0.05);
+  font-family: "Comfortaa", ui-sans-serif, system-ui, sans-serif;
+  background: none;
 }
 
-* { 
-  box-sizing: border-box; 
+* {
+  box-sizing: border-box;
+  background: none !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+html,
+body,
+#korona-runtime-root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
   background: none !important;
 }
 
-html, body, #korona-runtime-root { 
-  width: 100%; 
-  background: none !important;
-  height: 100%; 
-  margin: 0; 
-  overflow: hidden; 
+#korona-runtime-root {
+  position: relative;
+  background:
+    radial-gradient(circle at 18% 15%, rgba(255, 255, 255, 0.05), transparent 34%),
+    radial-gradient(circle at 80% 85%, rgba(255, 255, 255, 0.04), transparent 38%),
+    repeating-linear-gradient(to right, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 40px),
+    var(--bg-color) !important;
 }
 
-#korona-runtime-root { 
-  position: relative; 
-  background: radial-gradient(circle at 18% 15%, #33333344, transparent 34%), 
-              radial-gradient(circle at 80% 85%, #22222255, transparent 38%), 
-              #050505; 
+#runtime-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-#runtime-stage { 
-  position: absolute; 
-  inset: 0; 
-  z-index: 1; 
-  display: none; 
-  place-content: center; 
-  gap: 14px; 
-  text-align: center; 
-  color: #ffffff; 
-  transition: opacity .35s ease; 
+#runtime-stage.ready {
+  opacity: 0;
+  transform: scale(0.97);
+  pointer-events: none;
 }
 
-#runtime-stage.ready { 
-  opacity: 0; 
-  pointer-events: none; 
+.runtime-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  padding: 2.25rem 2.75rem;
+  border-radius: 16px;
+  background: var(--nav-bg) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  min-width: 280px;
 }
 
-#runtime-stage strong { 
-  display: none;
-  font-size: 2.2rem; 
-  letter-spacing: -.08em; 
-  text-shadow: 0 0 28px #ffffff66; 
+.runtime-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 900 !important;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-color) !important;
+  opacity: 0.5;
 }
 
-#runtime-stage p { 
-  display: none;
-  max-width: 32ch; 
-  margin: 0; 
-  color: #a3a3a3; 
-  font-size: .9rem; 
+#runtime-stage strong {
+  display: block;
+  font-size: 2rem;
+  font-weight: 900 !important;
+  letter-spacing: -0.02em;
+  color: var(--text-color) !important;
+  background: linear-gradient(135deg, var(--text-color), rgba(255, 255, 255, 0.45));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 28px rgba(255, 255, 255, 0.15);
 }
 
 .runtime-line {
-  width: 64px;
+  width: 96px;
   height: 4px;
-  margin: 0 auto 4px;
+  margin: 2px auto 2px;
   border-radius: 4px;
-  background: #222222;
+  background: var(--card-bg) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
 }
 
 .runtime-line::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 40%;
-  background: #ffffff;
+  background: var(--text-color) !important;
   border-radius: 4px;
-  box-shadow: 0 0 12px #ffffff99;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
   animation: k-stuff-slide 1s ease-in-out infinite alternate;
 }
 
-#runtime-frame { 
-  width: 100%; 
-  height: 100%; 
-  border: 0; 
-  background: none; 
+#runtime-stage p {
+  display: block;
+  max-width: 32ch;
+  margin: 0;
+  color: var(--text-color) !important;
+  opacity: 0.6;
+  font-size: 0.85rem;
+  font-weight: bold;
 }
 
-@keyframes k-stuff-slide { 
-  0% { transform: translateX(-100%); } 
-  100% { transform: translateX(250%); } 
+#runtime-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: none !important;
+}
+
+@keyframes k-stuff-slide {
+  0% {
+    transform: translateX(-150%);
+  }
+  100% {
+    transform: translateX(340%);
+  }
+}
+
+@media (max-width: 480px) {
+  .runtime-card {
+    padding: 1.75rem 2rem;
+    min-width: 220px;
+  }
+
+  #runtime-stage strong {
+    font-size: 1.5rem;
+  }
 }
