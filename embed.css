@@ -47,6 +47,7 @@ html, body, #korona-runtime-root {
 }
 
 #runtime-stage p { 
+  display: none;
   max-width: 32ch; 
   margin: 0; 
   color: #a3a3a3; 
